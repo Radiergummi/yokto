@@ -1,10 +1,10 @@
 <? namespace System;
 /**
- * picoFrame v0.2
+ * pico
  *
  * minimalist website framework designed for the most basic web apps and sites
  *
- * @package		picoFrame
+ * @package		pico
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
@@ -24,4 +24,6 @@ foreach ($routes as $route => $meta) {
 	}
 }
 
-render_view($valid, $request);
+$view = new View($valid, $request);
+
+$view->render();
