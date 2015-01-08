@@ -22,7 +22,7 @@ function render_view($type, $id) {
 	global $vars, $error;
 	switch($type) {
 		case 'index':
-			$vars['{$custom_text}'] = Hook::custom_hook();
+			$vars['{$custom_text}'] = Hook::hello_world();
 			$content = get_template('page_start');
 		break;
 
