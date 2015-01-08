@@ -9,7 +9,8 @@
  * @copyright	http://unlicense.org/
  */
 
- 
+// enable or disable logging
+LOG = true;
  
 // site name
 define('SITENAME', 'Website name');
