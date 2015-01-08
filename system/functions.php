@@ -27,34 +27,21 @@ function render_view($route, $request) {
 	if ($route === 'error') {
 
 		// append to log channel messages
-		syslog('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.');
+		syslog('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 1);
 
 		// send correct headers
 		header('Status: 404 Not Found');
 
 		// include error 404-template
 		$content = get_template('http_404');
-
 	} else {
 		// if we have a request string and valid route, set title to specific string
 		$template_vars['{$title}'] = ((!empty($request)) && (!empty($route)) ? SITENAME . ' | ' . $route['name'] : SITENAME);
 		$template_vars['{$name}'] = $route['name'];
-		
+		$vars['{$custom_text}'] = Hook::hello_world();
 		$content = get_template($route['template']);
-
 	}
-	
 
-
-
-	switch($route['template']) {
-		case 'index':
-			$vars['{$custom_text}'] = Hook::hello_world();
-		break;
-
-		case 'error':
-		break;
-	}
 	$htmlheader = get_template('inc_header');
 	$htmlfooter = get_template('inc_footer');
 	
