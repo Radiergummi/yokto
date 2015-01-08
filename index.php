@@ -1,10 +1,10 @@
 <?
 /**
- * picoFrame v0.2
+ * pico
  *
  * minimalist website framework designed for the most basic web apps and sites
  *
- * @package		picoFrame
+ * @package		pico
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
@@ -16,7 +16,8 @@ define('PATH', dirname(__FILE__) . DS);
 define('SYS', PATH . 'system' . DS);
 define('EXT', '.php');
 
-require SYS . 'config' . EXT;
 require SYS . 'hooks' . EXT;
+require SYS . 'config' . EXT;
 require SYS . 'functions' . EXT;
+require SYS . 'view' . EXT;
 require SYS . 'router' . EXT;
