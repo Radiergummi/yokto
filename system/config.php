@@ -17,9 +17,6 @@ define('SITENAME', 'Website name');
 // template folder path
 define('TDIR', 'templates' . DS);
 
-// asset folder path
-define('ADIR', 'assets');
-
 // available routes for this site
 $routes = array(
 	'1' => 'example',
@@ -36,7 +33,7 @@ $error = array(
 $vars = array(
 	'{$title}' => SITENAME,
 	'{$siteurl}' => URL,
-	'{$assetdir}' => ADIR,
+	'{$assetdir}' => 'assets',
 	'{$name}' => '',
 	'{$file}' => '',
 	'{$description}' => '',
