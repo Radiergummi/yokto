@@ -9,14 +9,14 @@
  * @copyright	http://unlicense.org/
  */
 
-// enable or disable logging
-define('LOG', true);
-
+ // enable or disable logging
+define('LOG', false);
+ 
 // site name
-define('SITENAME', 'Website name');
+define('SITENAME', 'Pico test instance');
 
 // template folder path
-define('TDIR', 'templates' . DS);
+define('TPLDIR', 'templates' . DS);
 
 // log folder path
 define('LOGDIR', SYS . 'log' . DS);
@@ -24,27 +24,30 @@ define('LOGDIR', SYS . 'log' . DS);
 // available routes for this site.
 // every route has its own array which is extendable (like the functionally unecessary comments-enabled)
 $routes = array(
-	'' => array(
+	array(
+		'slug' => 'error',
+		'name' => 'Error: Page not found',
+		'template' => 'http_404',
+		'comments-enabled' => false
+	),
+	array(
+		'slug' => '',
 		'name' => 'Start',
 		'template' => 'page_start',
 		'comments-enabled' => false
 	),
-	'foo-bar' => array(
+	array(
+		'slug' => 'foo-bar',
 		'name' => 'foo bar!',
 		'template' => 'page',
 		'comments-enabled' => true
 	),
-	'portfolio' => array(
+	array(
+		'slug' => 'portfolio',
 		'name' => 'Example Page',
 		'template' => 'page_portfolio',
 		'comments-enabled' => false
 	)
-);
-
-// available error messages
-$errors = array(
-	'http_404' => 'Error: The requested page could not be found.',
-	'template_not_found' => 'Error: The requested template could not be found.'
 );
 
 // available content variables to replace
@@ -52,7 +55,5 @@ $template_vars = array(
 	'{$title}' => SITENAME,
 	'{$siteurl}' => URL,
 	'{$assetdir}' => 'assets',
-	'{$name}' => '',
-	'{$file}' => '',
-	'{$description}' => '',
+	'{$bar}' => 'foo'
 );
