@@ -17,22 +17,23 @@ define('SITENAME', 'Website name');
 // template folder path
 define('TDIR', 'templates' . DS);
 
-// available routes for this site. every route has its own array which is extendable
+// available routes for this site.
+// every route has its own array which is extendable (like the functionally unecessary comments-enabled)
 $routes = array(
-	array(
-		'slug' => '',
+	'' => array(
 		'name' => 'Start',
-		'template' => 'page_start'
+		'template' => 'page_start',
+		'comments-enabled' => false
 	),
-	array(
-		'slug' => 'foo',
+	'foo-bar' => array(
 		'name' => 'foo bar!',
-		'template' => 'page'
+		'template' => 'page',
+		'comments-enabled' => true
 	),
-	array(
-		'slug' => 'kind-of-rediculous',
+	'portfolio' => array(
 		'name' => 'Example Page',
-		'template' => 'page_portfolio'
+		'template' => 'page_portfolio',
+		'comments-enabled' => false
 	)
 );
 
