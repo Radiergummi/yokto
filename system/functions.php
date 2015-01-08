@@ -43,7 +43,7 @@ function render_view($route, $request) {
 	$header = get_template('inc_header');
 	$footer = get_template('inc_footer');
 	
-	$output = str_replace(array_keys($vars), array_values($vars), $header . $content . $footer);
+	$output = str_replace(array_keys($template_vars), array_values($template_vars), $header . $content . $footer);
 	
 	echo $output;
 }
