@@ -56,7 +56,7 @@ function render_view($route, $request) {
  */
 function get_template($name) {
 	$template;
-	$path = PATH . TDIR . $name . EXT;
+	$path = PATH . TPLDIR . $name . EXT;
 	if (file_exists($path)) {
 		$template = file_get_contents($path);
 	} else {
@@ -71,6 +71,13 @@ function get_template($name) {
 	syslog('test',2);
 	return $template;
 }
+
+/**
+ * includes all
+ * 
+ * 
+ */
+
 /**
  * appends a message to the log. 
  * 
@@ -79,12 +86,11 @@ function get_template($name) {
  */
 function syslog($message,$channel = 1) {
 	$file = array('messages','debug','error');
-	debug($message);
 	error_log(date('r',$time) . ': ' . $message . PHP_EOL, 3, LOGDIR . $file[$channel] . '.log');
 }
 
 /**
- * stops the code, dumps given variable in readable form
+ * stops the code whereever inserted, dumps given variable in readable form
  * ! neat formatting stolen from http://php.net/manual/de/function.debug-backtrace.php#111355
  * 
  * @param mixed $data the variable to dump
@@ -103,7 +109,7 @@ function syslog($message,$channel = 1) {
 	echo '<pre><div class="info_self"> Halted at line ' . $debug[0][line] . '.</div><h1>Debug Info:</h1>';
 	echo '';
 	echo '<div class="dump"><h3>Dumped ' . gettype($data) . ':</h3>';
-	print_r(' " ' . $data . ' " ' . PHP_EOL . PHP_EOL);
+	print_r($data);
 	echo '</div><div class="trace">';
 	print_r($trace);
 	echo '</div></pre>';
