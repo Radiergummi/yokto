@@ -38,13 +38,13 @@ $routes = array(
 );
 
 // available error messages
-$error = array(
+$errors = array(
 	'http_404' => 'Error: The requested page could not be found.',
 	'template_not_found' => 'Error: The requested template could not be found.'
 );
 
 // available content variables to replace
-$vars = array(
+$template_vars = array(
 	'{$title}' => SITENAME,
 	'{$siteurl}' => URL,
 	'{$assetdir}' => 'assets',
