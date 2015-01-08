@@ -36,7 +36,7 @@ function render_view($route, $request) {
 		// set title to sitename only for index, append site name to other pages
 		$template_vars['{$title}'] = ((!empty($request)) && (!empty($route)) ? SITENAME . ' | ' . $route['name'] : SITENAME);
 		$template_vars['{$name}'] = $route['name'];
-		$vars['{$custom_text}'] = Hook::hello_world();
+		$template_vars['{$custom_text}'] = Hook::hello_world();
 		$content = get_template($route['template']);
 	}
 
