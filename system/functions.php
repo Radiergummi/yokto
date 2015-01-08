@@ -18,21 +18,21 @@
  * @param string $type the template name for this type of page.
  * @param mixed $id the unique identifier of the requested page.
  */
-function render_view($type, $id) {
-	global $vars, $error;
-	switch($type) {
+function render_view($route, $request = '') {
+	
+	// import template variables and error messages
+	global $template_vars, $errors;
+	
+	$content = get_template($route['template']);
+
+	switch($route['template']) {
 		case 'index':
 			$vars['{$custom_text}'] = Hook::hello_world();
-			$content = get_template('page_start');
-		break;
-
-		case 'page':
-			$content = get_template('page');
 		break;
 
 		case 'error':
 			header('Status: 404 Not Found');
-			$content = '<div id="error">' . $error['http_404'] . '</div>';
+			$content = '<div id="error">' . $errors['http_404'] . '</div>';
 		break;
 	}
 	$htmlheader = get_template('inc_header');
@@ -56,7 +56,7 @@ function get_template($name) {
 	if (file_exists($path)) {
 		$template = file_get_contents($path);
 	} else {
-		$template = '<div id="error">' . $error['template_not_found'] . '</div>';
+		$template = '<div id="error">' . $errors['template_not_found'] . '</div>';
 	}
 	return $template;
 }
