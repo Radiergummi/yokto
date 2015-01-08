@@ -19,8 +19,8 @@ define('TDIR', 'templates' . DS);
 
 // available routes for this site
 $routes = array(
-	'1' => 'example',
-	'2' => 'you can see where this is going'
+	'example-slug' => 'example',
+	'you-can-see-where-this-is-going' => 'you can see where this is going'
 );
 
 // available error messages
