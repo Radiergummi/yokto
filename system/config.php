@@ -10,8 +10,8 @@
  */
 
 // enable or disable logging
-LOG = true;
- 
+define('LOG', true);
+
 // site name
 define('SITENAME', 'Website name');
 
