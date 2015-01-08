@@ -1,0 +1,3 @@
+[submodule "system/thirdparty/parsedown"]
+	path = system/thirdparty/parsedown
+	url = https://github.com/erusev/parsedown
