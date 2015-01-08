@@ -60,7 +60,7 @@ function get_template($name) {
 	if (file_exists($path)) {
 		$template = file_get_contents($path);
 	} else {
-		$error_message = 'The requested template could not be retrieved. Please check your routes array in the config file.';
+		$error_message = 'The requested template "' . $template . '" could not be retrieved. Please check your routes array in the config file.';
 		if (!LOG){
 			$template = '<div id="error">' . $error_message . '</div>';
 		} else {
