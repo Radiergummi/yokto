@@ -17,24 +17,15 @@ $request = ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/');
 $route = (array_key_exists($request,$routes) ? $request : 'error');
 
 // if we have a request string and valid route, set title to specific string
-$vars['{$title}'] = ((!empty($request)) && (!empty($route)) ? SITENAME . ' | ' . $routes[$route] : SITENAME);
+$template_vars['{$title}'] = ((!empty($request)) && (!empty($route)) ? SITENAME . ' | ' . $routes[$route]['title'] : SITENAME);
 
-// if no route name passed, show index
-if (empty($request) || $route === '0') {
-	render_view('index', '0');
+// if route name is in available routes array, show content
+if ($route != 'error') {
+	$template_vars['{$name}'] = $routes[$route]['title'];
+	render_view($routes[$route]);
 }
 
-// if route name given, check it's existance
+// else, throw error 404
 else {
-
-	// if route name is in available routes array, show content
-	if ($route != 'error') {
-		$vars['{$name}'] = $routes[$route];
-		render_view('page', $route);
-	}
-
-	// else, throw error 404
-	else {
-		render_view('error', $route);
-	}
+	render_view('error', $request);
 }
