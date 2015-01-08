@@ -24,7 +24,7 @@ function render_view($route, $request) {
 	if ($route === 'error') {
 
 		// append to log channel messages
-		syslog('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 1);
+		syslog('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 0);
 
 		// set correct headers
 		header('Status: 404 Not Found');
@@ -76,7 +76,7 @@ function get_template($name) {
  * @param string $message the message to log
  * @param int $channel [1,2,3] the channel to log to, defaults to 1 = messages.
  */
-function syslog($message,$channel = 1) {
+function syslog($message,$channel = 0) {
 	$file = array('messages','debug','error');
 	error_log(date('r',$time) . ': ' . $message . PHP_EOL, 3, SYS . $file[$channel] . '.log');
 }
