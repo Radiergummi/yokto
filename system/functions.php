@@ -78,5 +78,5 @@ function get_template($name) {
  */
 function syslog($message,$channel = 0) {
 	$file = array('messages','debug','error');
-	error_log(date('r',$time) . ': ' . $message . PHP_EOL, 3, SYS . $file[$channel] . '.log');
+	error_log(date('r',$time) . ': ' . $message . PHP_EOL, 3, LOGDIR . $file[$channel] . '.log');
 }
