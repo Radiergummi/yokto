@@ -14,3 +14,5 @@ minimalist website framework designed for the most basic web apps and sites
 - complete
 
 
+###How pico works
+pico is completely route based. That means, all requests get passed to picos router.php which checks the URI against a set of statically defined routes. Now we know what the client requests and can deliver content stored for a given route.
