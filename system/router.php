@@ -13,7 +13,7 @@
 // the request string
 $request = ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/');
 
-// if the request is contained in our routes, set this to it
+// if the request is contained in our routes array in config, set route
 $route = (array_key_exists($request,$routes) ? $request : 'error');
 
 // if we have a request string and valid route, set title to specific string
