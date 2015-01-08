@@ -18,7 +18,7 @@ define('SITENAME', 'Website name');
 // template folder path
 define('TDIR', 'templates' . DS);
 
-// template folder path
+// log folder path
 define('LOGDIR', SYS . 'log' . DS);
 
 // available routes for this site.
