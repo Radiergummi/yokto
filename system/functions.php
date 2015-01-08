@@ -8,8 +8,6 @@
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
-
- 
  
  
 /**
@@ -23,29 +21,29 @@ function render_view($route, $request) {
 	// import template variables and error messages
 	global $template_vars;
 
-
 	if ($route === 'error') {
 
 		// append to log channel messages
 		syslog('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 1);
 
-		// send correct headers
+		// set correct headers
 		header('Status: 404 Not Found');
 
 		// include error 404-template
 		$content = get_template('http_404');
 	} else {
-		// if we have a request string and valid route, set title to specific string
+
+		// set title to sitename only for index, append site name to other pages
 		$template_vars['{$title}'] = ((!empty($request)) && (!empty($route)) ? SITENAME . ' | ' . $route['name'] : SITENAME);
 		$template_vars['{$name}'] = $route['name'];
 		$vars['{$custom_text}'] = Hook::hello_world();
 		$content = get_template($route['template']);
 	}
 
-	$htmlheader = get_template('inc_header');
-	$htmlfooter = get_template('inc_footer');
+	$header = get_template('inc_header');
+	$footer = get_template('inc_footer');
 	
-	$output = str_replace(array_keys($vars), array_values($vars), $htmlheader . $content . $htmlfooter);
+	$output = str_replace(array_keys($vars), array_values($vars), $header . $content . $footer);
 	
 	echo $output;
 }
