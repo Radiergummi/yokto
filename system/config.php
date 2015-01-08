@@ -16,7 +16,7 @@ define('LOG', false);
 define('SITENAME', 'Pico test instance');
 
 // template folder path
-define('TPLDIR', 'templates' . DS);
+define('TPLDIR', PATH . 'templates' . DS);
 
 // log folder path
 define('LOGDIR', SYS . 'log' . DS);
@@ -28,32 +28,40 @@ $routes = array(
 		'slug' => 'error',
 		'name' => 'Error: Page not found',
 		'template' => 'http_404',
-		'comments-enabled' => false
+		'comments-enabled' => false,
+		'variables' => array(
+			'{$hello_world}' => Hook::hello_world(),
+			'{$foo}' => 'bar'
+		)
 	),
 	array(
 		'slug' => '',
 		'name' => 'Start',
 		'template' => 'page_start',
-		'comments-enabled' => false
+		'comments-enabled' => false,
+		'variables' => array(
+			'{$hello_world}' => Hook::hello_world(),
+			'description' => 'foo bar stuff'
+		)
 	),
 	array(
 		'slug' => 'foo-bar',
 		'name' => 'foo bar!',
 		'template' => 'page',
-		'comments-enabled' => true
+		'comments-enabled' => true,
+		'variables' => array(
+			'{$hello_world}' => Hook::hello_world(),
+			'{$foo}' => 'bar'
+		)
 	),
 	array(
 		'slug' => 'portfolio',
 		'name' => 'Example Page',
 		'template' => 'page_portfolio',
-		'comments-enabled' => false
+		'comments-enabled' => false,
+		'variables' => array(
+			'{$hello_world}' => Hook::hello_world(),
+			'{$foo}' => 'bar'
+		)
 	)
-);
-
-// available content variables to replace
-$template_vars = array(
-	'{$title}' => SITENAME,
-	'{$siteurl}' => URL,
-	'{$assetdir}' => 'assets',
-	'{$bar}' => 'foo'
 );
