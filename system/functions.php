@@ -56,7 +56,7 @@ function render_view($route, $request) {
  */
 function get_template($name) {
 	$template;
-	$path = PATH . TDIR . $name . EXT;
+	$path = PATH . TPLDIR . $name . EXT;
 	if (file_exists($path)) {
 		$template = file_get_contents($path);
 	} else {
