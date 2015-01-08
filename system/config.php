@@ -26,6 +26,7 @@ $routes = array(
 	'2' => 'you can see where this is going'
 );
 
+// available error messages
 $error = array(
 	'http_404' => 'Error: The requested page could not be found.',
 	'template_not_found' => 'Error: The requested template could not be found.'
