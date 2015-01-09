@@ -12,21 +12,7 @@
  
  
 class View {
-	
-	/**
-	 * the route to create a view for
-	 *
-	 * @var array
-	 */
-	public $route = array();
-	
-	/**
-	 * the original request
-	 *
-	 * @var string
-	 */
-	public $request;
-	
+
 	/**
 	 * replacement variables
 	 *
@@ -38,18 +24,6 @@ class View {
 		'assetdir' => 'assets'
 	);
 
-	/**
-	 * Constructor
-	 *
-	 * @param array
-	 * @param string
-	 */
-	public function __construct($route) {
-		$this->route = $route;
-		$this->request = $route['request'];
-		$this->vars = array_merge($this->vars, $route['variables']);
-	}
-	
 	/**
 	 * prepares the html content and delivers it to the client.
 	 * 
