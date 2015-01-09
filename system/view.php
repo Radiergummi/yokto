@@ -1,11 +1,11 @@
 <? namespace System;
 
 /**
- * pico
+ * yokto
  *
  * minimalist website framework designed for the most basic web apps and sites
  *
- * @package		pico
+ * @package		yokto
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
