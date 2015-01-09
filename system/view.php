@@ -79,10 +79,8 @@ class View {
 		
 		extract($this->vars);
 		
-		require TPLDIR . 'inc_header' . EXT;
 		require TPLDIR . $route['template'] . EXT;
-		require TPLDIR . 'inc_footer' . EXT;
-		
+
 		return ob_get_contents();
 
 	}
