@@ -1,10 +1,10 @@
 <?
 /**
- * yokto
+ * yocto
  *
  * minimalist website framework designed for the most basic web apps and sites
  *
- * @package		yokto
+ * @package		yocto
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
@@ -21,3 +21,4 @@ require SYS . 'config' . EXT;
 require SYS . 'functions' . EXT;
 require SYS . 'view' . EXT;
 require SYS . 'router' . EXT;
+require SYS . 'init' . EXT;
