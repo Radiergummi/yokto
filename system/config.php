@@ -14,16 +14,13 @@
 define('LOG', false);
  
 // site name
-define('SITENAME', 'Pico test instance');
-
+define('SITENAME', 'Yokto test instance');
 // template folder path
 define('TPLDIR', PATH . 'templates' . DS);
-
 // log folder path
 define('LOGDIR', SYS . 'log' . DS);
 
-// available routes for this site.
-// every route has its own array which is extendable (like the functionally unecessary comments-enabled)
+// available routes for this site
 $routes = array(
 	array(
 		'slug' => 'error',
@@ -31,18 +28,19 @@ $routes = array(
 		'template' => 'http_404',
 		'comments-enabled' => false,
 		'variables' => array(
-			'{$hello_world}' => Hook::hello_world(),
+			'hello_world' => Hook::hello_world(),
 			'{$foo}' => 'bar'
 		)
 	),
 	array(
 		'slug' => '',
-		'name' => 'Start',
+		'name' => 'Home',
 		'template' => 'page_start',
 		'comments-enabled' => false,
 		'variables' => array(
-			'{$hello_world}' => Hook::hello_world(),
-			'description' => 'foo bar stuff'
+			'hello_world' => Hook::hello_world(),
+			'intro' => 'This is the first page visitors get to see.',
+			'jQuery' => true
 		)
 	),
 	array(
@@ -51,7 +49,7 @@ $routes = array(
 		'template' => 'page',
 		'comments-enabled' => true,
 		'variables' => array(
-			'{$hello_world}' => Hook::hello_world(),
+			'hello_world' => Hook::hello_world(),
 			'{$foo}' => 'bar'
 		)
 	),
@@ -61,7 +59,7 @@ $routes = array(
 		'template' => 'page_portfolio',
 		'comments-enabled' => false,
 		'variables' => array(
-			'{$hello_world}' => Hook::hello_world(),
+			'hello_world' => Hook::hello_world(),
 			'{$foo}' => 'bar'
 		)
 	)
