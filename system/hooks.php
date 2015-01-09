@@ -1,10 +1,10 @@
 <? namespace System;
 /**
- * picoFrame v0.2
+ * yokto
  *
  * minimalist website framework designed for the most basic web apps and sites
  *
- * @package		picoFrame
+ * @package		yokto
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
