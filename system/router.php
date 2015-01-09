@@ -9,7 +9,8 @@
  * @copyright	http://unlicense.org/
  */
 
- $valid;
+
+$valid;
  
 // the request string
 $request = ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/');
