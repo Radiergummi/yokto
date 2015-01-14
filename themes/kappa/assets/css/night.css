@@ -1,0 +1,10 @@
+body.night a { color: #17D2ED; }
+
+body.night .module { background: #666; color: #bbb }
+
+body.night header { color: #ccc }
+body.night > header h1 a { color: #fafafa }
+body.night main { background: #444; color: #bbb }
+body.night .module.github header .media path { fill: #bbb }
+	body.night .module.github article a:hover { background: rgba(255,255,255,.2); text-shadow: 1px 1px rgba(0,0,0,.3) }
+
