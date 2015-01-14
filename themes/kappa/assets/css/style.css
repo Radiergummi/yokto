@@ -1,0 +1,58 @@
+/*#region global*/
+	@font-face { font-family: 'Roboto'; font-style: normal; font-weight: 400; src: local('RobotoDraft'), local('RobotoDraft-Regular'), url(https://fonts.gstatic.com/s/robotodraft/v2/0xES5Sl_v6oyT7dAKuoni7rIa-7acMAeDBVuclsi6Gc.woff) format('woff'); }
+	@font-face { font-family: 'arca'; src: url('../fonts/arca-heavy.woff2') format('woff2'), url('../fonts/arca-heavy.woff') format('woff'); font-weight: normal; font-style: normal; }
+	html { width: 100%; height: 100% }
+	body { height: calc(100% - 2rem); margin: 1rem; font-family: 'Roboto', sans-serif; font-size: 1rem; background: #026B79 }
+	a { color: #06616E }
+
+/*#endregion*/
+	
+	#themeSwitcher { position: absolute; top: 0.5rem; right: 0.5rem; width: 2rem; height: 2rem; border: 1px solid rgba(0,0,0,.3); border-radius: 1rem; transition: all .2s; opacity: .5; box-shadow: inset 0 -2px 5px rgba(0,0,0,.4); }
+	#themeSwitcher:hover { opacity: .8; cursor: pointer; }
+	#themeSwitcher svg { width: 100%; height: 100%; }
+	body.night #themeSwitcher { transform: rotate(180deg); }
+	
+	body > header,
+	main { position: relative; max-width: 1400px; margin: 0 auto; border: 1px solid rgba(0,0,0,.1); box-shadow: 0 1px 8px rgba(0,0,0,.3); }
+	
+	body > header { border-bottom: 9px solid rgba(0,0,0,.1); border-radius: 4px 4px 0 0; background: #038496; color: #fafafa; text-align: center; }
+		body > header > .heading { display: table; width: 100%; height: 200px; font-family: 'arca'; }
+			body > header h1 { display: table-cell; vertical-align: middle; font-size: 2rem; text-shadow: 2px 2px rgba(0, 0, 0, 0.2); }
+				body > header h1 a { padding: 3rem; color: #fafafa; }
+				body > header h1 a:active { border: 1px solid rgba(255,255,255,.5); border-radius: 2px; }
+		body > header > nav { position: relative; width: 100%; height: 100px; padding: 0 .5rem; line-height: 50px; }
+		body > header > nav ul { margin: 0 auto; }
+		body > header > nav ul li { display: inline-block; margin: 0 .5rem }
+		body > header > nav ul li a { padding: 10px 20px; background: rgba(255,255,255,.2); text-shadow: 1px 1px rgba(0,0,0,.1); border-radius: 4px; box-shadow: inset 0 1px rgba(255,255,255,.1), inset 0 -1px rgba(0,0,0,0.1), inset 0 2px 15px rgba(0,0,0,.05), 0 1px 1px rgba(0,0,0,.1); }
+		body > header > nav ul li a:hover { background: rgba(255,255,255,.8); color: #2894A3; }
+
+	main { height: calc(100% - 310px); padding: 1rem; background: #fafafa; border-top: 0; border-radius: 0 0 4px 4px; }
+	main > article { width: calc(100% - 200px); padding-right: 1rem }
+	.module.github { position: absolute; right: 1rem; top: 1rem; width: 200px; margin: 0 }
+	.module.github > header li.rich .media { background: none }
+	.module.github article { font-size: .9rem; text-align: center }
+	.module.github article a { display: block; padding: 1rem; font-size: .9rem; background: rgba(0,0,0,.05); text-align: center; transition: all .2s; }
+	.module.github article a:hover { background: rgba(0,0,0,.1); text-shadow: 1px 1px rgba(255,255,255,.3) }
+	
+	
+	/*#region inline text*/
+		main article.page { width: 100%; }
+		main article > header { margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid rgba(0,0,0,.2) }
+		main article.page p { line-height: 1.4 }
+		main h1 { margin: .5rem 0; font-size: 1.5rem }
+		main h2 { margin: .3rem 0; font-size: 1.4rem }
+		main p code { padding: 2px 8px; border-radius: 3px; background: rgba(0,0,0,.1) }
+	/*#endregion */
+	
+@media screen and (max-width: 600px) {
+	body > header > nav { height: initial; }
+	body > header > nav ul li { display: block; margin: .5rem 0; }
+	body > header > nav ul li a { display: block; }
+
+	body > header h1 a { padding: .5rem; }
+
+	main { height: initial; margin-bottom: 1rem; }
+	main > article { width: 100%; }
+	
+	.module.github { position: relative; top: initial; right: initial; width: 100%; margin-top: 1rem }
+}
