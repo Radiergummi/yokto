@@ -1,4 +1,3 @@
-    <main>
     	<article class="introduction">
 			<?=$intro?>
 		</article>
@@ -23,4 +22,3 @@
 				</article>
 			</div>
 		</aside>
-    </main>
