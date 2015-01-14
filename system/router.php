@@ -32,8 +32,9 @@ class Router {
 	 * @param array
 	 * @param string
 	 */
-	public function __construct($routes) {
-		$this->routes = $routes;
+	public function __construct($additional_routes = array()) {
+		$routes = Config::routes();
+		$this->routes = array_merge($additional_routes, $routes, $this->get_routes('content'));
 	}
 
 	/**
@@ -42,19 +43,17 @@ class Router {
 	 * @param array
 	 * @param string
 	 */
-	public function match($request) {
-
-		// the request string is exploded into requested nodes to support sub categories in the future
-		$request = explode('/',ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/'));
-
+	public function match() {
+		$request = rtrim(ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/'),'/');
 		$routes = $this->routes;
 
-		// if the request is contained in our routes array in config, set route
+		// if the request is contained in our routes, set match
 		foreach ($routes as $route => $meta) {
-			if ($request[0] === $meta['slug']) {
+			if ($request === $meta['slug']) {
 
-				// if correct route is found, return the array containing its meta info
-				$routes[$route]['request'] = $request;
+				// store request in config 
+				Config::set('env','request',$request);
+				
 				$this->match = $routes[$route];
 
 				break;
@@ -65,7 +64,37 @@ class Router {
 				$this->match = $routes[0];
 			}
 		}
+
+		if ($this->match === 'error' && Config::debug('loglevel') === 'development') {
 		
+			// if we've got an error and debugging enabled, log the routing error
+			log('The request ' . $request . ' could not be matched.', 1);
+		}		
+
 		return $this->match;
+	}
+
+	/**
+	 * get all files in content dir recursively
+	 *
+	 * @param array
+	 * @param string
+	 */
+	public function get_routes($directory, $ext = '') {
+	    $array_items = array();
+	    if($handle = opendir($directory)){
+	        while(false !== ($file = readdir($handle))){
+	            if(preg_match("/^(^\.)/", $file) === 0){
+	                if(is_dir($directory. "/" . $file)){
+	                    $array_items = array_merge($array_items, $this->get_routes($directory. "/" . $file, $ext));
+	                } else {
+	                    $file = ltrim($directory . "/" . $file,'content/');
+						$array_items[]['slug'] = preg_replace('/\\.[^.\\s]{2,3}$/', '', $file);
+	                }
+	            }
+	        }
+	        closedir($handle);
+	    }
+	    return $array_items;
 	}
 }
