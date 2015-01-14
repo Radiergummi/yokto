@@ -19,4 +19,4 @@ You can see a running instance of yokto here: http://yokto.9dev.de
 
 
 ###How yokto works
-yokto is completely route based. That means, all requests get passed to yoktos router.php which checks the URI against a set of statically defined routes. Now we know what the client requests and can deliver content stored for a given route.
+yokto is completely route based. That means, all requests get passed to yoktos router.php which checks the URI against all files in the content directory, aswell as a set of statically defined routes. Now we know what the client requests and can deliver content stored for a given route.
