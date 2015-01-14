@@ -26,9 +26,11 @@ class View {
 	 * @param boolean
 	 */
 	public static function render($route, $ajax = false) {
+	
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') $ajax = true;
+
 		$request = Config::routes('request');
 
-		#if ($route['slug'] === 'error') {
 		if ($route === 'error') {
 
 			// append to log channel messages
