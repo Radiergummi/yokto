@@ -11,9 +11,15 @@
  */
 
 
-$router = new Router($routes);
-$route = $router->match($request);
+/**
+ * Error handling
+ */
+set_exception_handler(array('System\Error', 'exception'));
+set_error_handler(array('System\Error', 'native'));
+register_shutdown_function(array('System\Error', 'shutdown'));
 
+
+$route = (new Router($routes))->match();
 $response = View::render($route);
 
 echo $response;
