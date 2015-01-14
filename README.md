@@ -1,9 +1,9 @@
 # yokto
-minimalist website framework designed for the most basic web apps and sites
+minimalist website framework designed for the most basic web apps and sites.
 
 ####Current status
 It's alive! It's alive! The current build runs perfectly well.
-
+You can see a running instance of yokto here: http://yokto.9dev.de
 
 ####What yokto *is*
 - quick
