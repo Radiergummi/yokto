@@ -1,3 +1,4 @@
+	</main>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
