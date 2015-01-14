@@ -1,5 +1,5 @@
     	<article class="introduction">
-			<?=$intro?>
+			<?=site_text('start')?>
 		</article>
 		<aside class="module github">
 			<header>
