@@ -1,0 +1,12 @@
+{
+	"info" : {
+		"name" : "kappa",
+		"creator" : "Moritz Friedrich",
+		"website" : "moritzfriedrich.com",
+		"update_url" : "error_not_implemented"
+	},
+	"variables" : {
+		"assetpath" : "assets",
+		"foo" : "bar"
+	}
+}
