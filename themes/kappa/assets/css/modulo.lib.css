@@ -1,0 +1,76 @@
+/**
+ * Modulo Framework v0.2
+ * by Moritz Friedrich
+ * 
+ * @website http://moritzfriedrich.com/
+ * @license http://unlicense.org/
+ */
+
+/******************************* modules */
+ .module {
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+.module > header, .module > footer {
+    padding: 15px;
+}
+.module > div.container {
+    padding: 0;
+}
+.module > header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.module > footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+.stack-vertical > :not(:only-child):not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.stack-horizontal > :not(:only-child):not(:last-of-type) {
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/******************************* lists */
+ ul.list {
+    padding: 0;
+}
+ul.list > li {
+    padding: 10px 15px;
+}
+ul.list > li.rich {
+    display: table;
+    width: 100%;
+    padding: 0;
+}
+ul.list > li.rich > div {
+    display: table-cell;
+}
+ul.list > li.rich > .media {
+    width: 50px;
+    height: 100%;
+    background: #4679BD;
+}
+ul.list.list > li.rich > .text {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+/******************************* modals */
+ .modal {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 80%;
+    min-height: 100px;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
