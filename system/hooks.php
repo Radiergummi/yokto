@@ -8,14 +8,12 @@
  * @link		http://moritzfriedrich.com
  * @copyright	http://unlicense.org/
  */
-
  
  
 /**
  * Hooks are a way to extend pico by implementing custom, string returning functions.
  */
 class Hook {
-
 	/**
 	 * example hook.
 	 *
