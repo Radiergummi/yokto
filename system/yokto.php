@@ -75,7 +75,6 @@ class Error {
 					</head>
 					<body>
 						<h1>Uncaught Exception</h1>
-						<p><code>' . $message . '</code></p>
 						<h3>Origin</h3>
 						<p><code>' . substr($file, strlen(PATH)) . ' on line ' . $line . '</code></p>
 						<h3>Trace</h3>
