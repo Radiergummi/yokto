@@ -420,7 +420,7 @@ class View {
 			$template = 'http_404';
 			
 		} else {
-			$template = (!empty($route['template']) ? $route['template'] : 'page');
+			$template = (!empty($route['template']) ? $route['template'] : Config::env('default_template'));
 		}
 
 		$theme = self::get_theme();
