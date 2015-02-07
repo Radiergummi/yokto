@@ -4,5 +4,6 @@ return array(
 	'theme' => 'kappa',
 	'themedir' => 'themes' . DS,
 	'logdir' => SYS . 'log' . DS,
-	'assetdir' => 'assets'
+	'assetdir' => 'assets',
+	'default_template' => 'page'
 );
