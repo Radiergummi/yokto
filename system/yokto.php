@@ -14,20 +14,23 @@ use ErrorException;
 
  
  
-/**
- * Error handling
- */
+// Error handling
 set_exception_handler(array('System\Error', 'exception'));
 set_error_handler(array('System\Error', 'native'));
 register_shutdown_function(array('System\Error', 'shutdown'));
 
+// Session handling
 $session = new Session();
 
+// Routing
 $route = (new Router())->match();
+
+// View rendering
 $response = View::render($route);
 
 $session->write();
 $session->get('id');
+
 echo $response;
 
 
@@ -42,13 +45,16 @@ class Error {
 	 *
 	 * @param object The uncaught exception
 	 */
-	public static function exception($e) {
+	public static function exception($e, $m = '') {
 		log($e, 2);
-
+		$message = (is_object($e) ? $e->getMessage() : $m);
+		$file = (is_object($e) ? $e->getFile() : $e[0]['file']);
+		$line = (is_object($e) ? $e->getLine() : $e[0]['line']);
+		$trace = (is_object($e) ? static::getExceptionTraceAsString($e) : static::getDebugTraceAsString($e));
+		
 		if(Config::debug('detailed_error_pages')) {
 			// clear output buffer
 			while(ob_get_level() > 1) ob_end_clean();
-
 				echo '<html>
 					<head>
 						<title>Uncaught Exception</title>
@@ -69,11 +75,11 @@ class Error {
 					</head>
 					<body>
 						<h1>Uncaught Exception</h1>
-						<p><code>' . $e->getMessage() . '</code></p>
+						<p><code>' . $message . '</code></p>
 						<h3>Origin</h3>
-						<p><code>' . substr($e->getFile(), strlen(PATH)) . ' on line ' . $e->getLine() . '</code></p>
+						<p><code>' . substr($file, strlen(PATH)) . ' on line ' . $line . '</code></p>
 						<h3>Trace</h3>
-						<pre>' . self::getExceptionTraceAsString($e) . '</pre>
+						<pre>' . $trace . '</pre>
 					</body>
 					</html>';
 			}
@@ -85,9 +91,27 @@ class Error {
 		exit(1);
 	}
 
+	public static function getDebugTraceAsString($exception) {
+		$output = "";
+		$stackLen = count($exception);
+		for ($i = 1; $i < $stackLen; $i++) {
+			$entry = $exception[$i];
+
+			$func = $entry['function'] . '(';
+			$argsLen = count($entry['args']);
+			for ($j = 0; $j < $argsLen; $j++) {
+				$func .= $entry['args'][$j];
+				if ($j < $argsLen - 1) $func .= ', ';
+			}
+        $func .= ')';
+
+        $output .= $entry['file'] . ':' . $entry['line'] . ' - ' . $func . PHP_EOL;
+    }
+    return $output;
+	}
 	
 	public static function getExceptionTraceAsString($exception) {
-		$rtn = "";
+		$output = "";
 		$count = 0;
 		foreach ($exception->getTrace() as $frame) {
 			$args = "";
@@ -112,7 +136,7 @@ class Error {
 				}
 				$args = join(", ", $args);
 			}
-			$rtn .= sprintf( "#%s %s(%s): %s%s(%s)\n",
+			$output .= sprintf( "#%s %s(%s): %s%s(%s)\n",
 				$count,
 				$frame['file'],
 				$frame['line'],
@@ -121,7 +145,7 @@ class Error {
 				$args );
 			$count++;
 		}
-		return $rtn;
+		return $output;
 	}
 	
 	/**
@@ -426,7 +450,7 @@ class View {
 		if (is_readable($file = PATH . 'themes' . DS . Config::env('theme') . DS . 'theme.json')){
 			return json_decode(file_get_contents($file),true);
 		} else {
-			Error::exception('Theme file not found at ' . $file);
+			Error::exception(debug_backtrace(), 'Theme file not found at ' . $file);
 
 			// append to log channel error
 			log('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 2);
