@@ -427,7 +427,7 @@ class View {
 		$vars = (!empty($route['variables']) ? array_merge(self::$vars, $route['variables']) : self::$vars);
 
 		$vars['sitename'] = Config::env('sitename');
-		$vars['title'] = ((!empty($request)) && (!empty($route)) ? $sitename . ' | ' . $route['name'] : $sitename);
+		$vars['title'] = ((!empty($request)) && (!empty($route)) ? $vars['sitename'] . ' | ' . $route['name'] : $vars['sitename']);
 		$vars['name'] = $route['name'];
 		$vars['slug'] = $route['slug'];
 		
