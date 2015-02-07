@@ -534,6 +534,7 @@ function log($message,$channel = 1) {
  * @param mixed $data the variable to dump
  */
  function debug($data = 'no data given') {
+	if (Config::debug('loglevel') == 'production') return;
 	$debug = array_reverse(debug_backtrace());
 	$trace;
     foreach ($debug as $k => $v) { 
