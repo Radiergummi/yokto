@@ -136,9 +136,9 @@ class Error {
 				}
 				$args = join(", ", $args);
 			}
-			$output .= sprintf( "#%s %s(%s): %s%s(%s)\n",
+			$output .= sprintf( "#%s %s on line %s: %s%s(%s)\n",
 				$count,
-				$frame['file'],
+				substr($frame['file'], strlen(PATH)),
 				$frame['line'],
 				isset($frame['class']) ? $frame['class'] . '->' : '',
 				$frame['function'],
