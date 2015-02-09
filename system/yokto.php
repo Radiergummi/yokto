@@ -234,16 +234,44 @@ class Config {
 	 */
 	public static $data = array();
 	
+	/**
+	 * set a file in the config array
+	 * 
+	 * @param string
+	 * @param string
+	 * @param string
+	 * 
+	 */
 	public static function set($file, $key, $value){
 			static::$data[$file][$key] = $value;
 	}
 	
-	public static function get($file, $value){
-		if(is_readable($path = SYS . 'config' . DS . $file . EXT)) {
-			static::$data[$file] = require $path;
-		}
+	/**
+	 * retrieve a value from the configuration by looking into
+	 * the data array first and importing data from file if not yet present.
+	 * 
+	 * @param string
+	 * @param string
+	 * 
+	 * @return string|array
+	 */
+	public static function get($file, $key){
 		
-		return (isset($value) ? self::$data[$file][$value] : self::$data[$file]);
+		// check if config group exists
+		if (!isset(static::$data[$file])) {
+			if(is_readable($path = SYS . 'config' . DS . $file . EXT)) {
+				static::$data[$file] = require $path;
+			}
+		} else {
+			
+			// check if config key exists in group
+			if (!isset(static::$data[$file][$key])) {
+				if(is_readable($path = SYS . 'config' . DS . $file . EXT)) {
+					static::$data[$file] = array_merge(static::$data[$file], require $path);
+				}
+			}
+		}			
+		return (isset($key) ? static::$data[$file][$key] : static::$data[$file]);
 	}
 	
 	/**
@@ -259,10 +287,9 @@ class Config {
 	 */
 	public static function __callStatic($method, $arguments = '') {
 		$key = $method;
-		
 		$value = (is_array($arguments) && ($arguments > 1) ? array_shift($arguments) : (string) $arguments);
 
-		return self::get($key, $value);
+		return static::get($key, $value);
 	}
 	
 }
@@ -304,7 +331,10 @@ class Router {
 	 * @param string
 	 */
 	public function match() {
-		$request = rtrim(ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/'),'/');
+		$uri = explode('?', rtrim(ltrim(htmlspecialchars($_SERVER['REQUEST_URI']),'/'),'/'));
+		$request = array_shift($uri);
+		Config::set('env', 'get', array_shift($uri));
+
 		$routes = $this->routes;
 
 		// if the request is contained in our routes, set match
@@ -312,7 +342,7 @@ class Router {
 			if ($request === $meta['slug']) {
 
 				// store request in config 
-				Config::set('env','request',$request);
+				Config::set('env', 'request', $request);
 				
 				$this->match = $routes[$route];
 
@@ -403,7 +433,9 @@ class View {
 	 */
 	public static function render($route, $ajax = false) {
 		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') $ajax = true;
-
+		//sdebug(Config::env('get'));
+		if(isset($_GET['inline'])) $ajax = true;
+		
 		$template_dir = PATH . 'themes' . DS . Config::env('theme') . DS;
 		
 		$request = Config::routes('request');
@@ -558,17 +590,18 @@ function log($message,$channel = 1) {
  * @param mixed $data the variable to dump
  */
  function debug($data = 'no data given') {
-	if (Config::debug('loglevel') == 'production') return;
 	$debug = array_reverse(debug_backtrace());
+ if (Config::debug('loglevel') == 'production') return;
+
 	$trace;
     foreach ($debug as $k => $v) { 
         array_walk($v['args'], function (&$item, $key) { 
             $item = var_export($item, true); 
         }); 
         $trace .= '<div><span>#' . $k . '    ' . $v['file'] . ' (<b>' . $v['line'] . '</b>):</span> ' . (isset($v['class']) ? $v['class'] . '->' : '') . $v['function'] . '(' . implode(', ', $v['args']) . ')' . "</div>\n"; 
-    } 
+    }
 	echo '<style>pre{margin:1rem;padding:1rem;background:#fafafa;border:1px solid #c0c0c0;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.2);white-space:pre-line}h1{display:block;margin:0 0 20px;padding:0 0 .5rem;border-bottom:1px solid #ccc}.info_self{float:right;padding:4px 10px;background:#BCFF95;border-radius:3px;border:1px solid #ccc;}.dump{margin:5px 0;padding:5px 1rem;background:#eee;border:1px solid #ccc;border-radius:3px;}.dump>h3{margin:5px 0}.trace{margin-top:1rem;padding-left:22px;line-height:calc(1rem + 4px);text-indent:-22px;word-wrap:break-word}.trace>div:last-of-type{color:#999}.trace>div:last-of-type>span{background:rgba(100,200,105,.44);color:#555}.trace span{padding:2px 6px;background:rgba(31,20,218,.22);border-radius:3px}</style>';
-	echo '<pre><div class="info_self"> Halted at line ' . $debug[0][line] . '.</div><h1>Debug Info:</h1>';
+	echo '<pre><div class="info_self"> Halted at line ' . $debug[0]['line'] . '.</div><h1>Debug Info:</h1>';
 	echo '';
 	echo '<div class="dump"><h3>Dumped ' . gettype($data) . ':</h3>';
 	print_r($data);
