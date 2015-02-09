@@ -440,7 +440,7 @@ class View {
 		
 		$request = Config::routes('request');
 
-		if ($route === 'error') {
+		if ($route['slug'] === 'error') {
 
 			// append to log channel messages
 			log('Error 404 - Page not found: "' . URL . DS . $request . '" requested from client ' . $_SERVER['REMOTE_ADDR'] . '.', 0);
