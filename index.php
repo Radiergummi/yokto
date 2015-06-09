@@ -1,17 +1,17 @@
-# Rewriting
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L,QSA]
+<?php
 
-# Rewrite all assets to get shorter links (like "/css/style.css")
-RewriteRule ^(css|js|img|icon)/(.*)$ /public/assets/$1/$2 [L,QSA]
+// env definitions
+define('DS', DIRECTORY_SEPARATOR);
 
-# Rewrite all requests for real file paths
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+define('PATH', dirname(__FILE__) . DS);
 
-# Rewrite all requests to index.php
-RewriteRule . /index.php [L,QSA]
+define('SYS', PATH . 'system' . DS);
 
-</IfModule>
+define('PUB', PATH . 'public' . DS . 'content' . DS);
+
+define('EXT', '.php');
+
+
+
+// start the app
+require SYS . 'start' . EXT;
