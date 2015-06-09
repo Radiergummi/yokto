@@ -9,8 +9,8 @@
 		
 		# Google Recaptcha data
 		'recaptcha' => [
-			'public' => '6Lfy8AcTAAAAAHU8VtoO6dkkuPfMUzDVT9TTx50g',
-			'secret' => '6Lfy8AcTAAAAAKwL8fktxGNEqmxbDO4Hrnajmckk'
+			'public' => '',
+			'secret' => ''
 		],
 
 		'search' => [
