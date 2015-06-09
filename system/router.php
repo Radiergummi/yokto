@@ -50,13 +50,13 @@ class Router
 		 * if the URL was called without a resource identifier
 		 *
 		 */
-		if ($uri == '' || $uri == '/') return new View('start', []);
+		if ($uri == '' || $uri == '/') return new View(Config::get('routes.home.template'), []);
 		
 		/**
 		 * if no rule matches, show error page
 		 *
 		 */
-			Config::set('routes.error.httpStatusCode', '404');
-			return new \View('error', Config::get('routes.error'));
+		Config::set('routes.error.httpStatusCode', '404');
+		return new \View('error', Config::get('routes.error'));
 	}
 }
