@@ -1,6 +1,0 @@
-<?
-
-return array(
-	'detailed_error_pages' => true, //  wether to send detailed information to clients in case of exceptions
-	'loglevel' => 'development' // debug: log everything | production: log only major exceptions
-);
