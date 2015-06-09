@@ -3,8 +3,9 @@
 		'error' => [
 			'title' => 'Error'
 		],
-		'start' => [
-			'title' => 'Home'
+		'home' => [
+			'title' => 'Home',
+			'template' => 'home'
 		],
 		'foo' => [
 			'title' => 'bar'
